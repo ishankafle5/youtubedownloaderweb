@@ -1,0 +1,26 @@
+{
+    "version":2,
+    "builds":[
+        {
+            "src":"youtube/wsgi.py",
+            "use":"@vercel/python",
+            "config":{"maxLamdaSize":"15mb","runtime":"python3.10"}
+        },{
+            "src":"build_files.sh",
+            "config":{
+                "distDir":"staticfiles_build"
+            }
+        }
+    ],
+    "routes":[
+        {
+            "src":"/media/(.*",
+            "dest":"/static/$1"
+
+        },
+        {
+            "src":"/(.*)",
+            "dest":"youtube/wsgi.py"
+        }
+    ]
+}
